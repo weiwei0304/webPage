@@ -10,21 +10,17 @@
         <!-- 桌面版導航選單 - 在更小的螢幕尺寸以上顯示 -->
         <nav class="hidden sm:block">
           <ul class="flex space-x-8">
-            <li>
-              <RouterLink
-                :to="{ name: 'shop' }"
-                class="text-gray-700 hover:text-gray-900 transition-colors"
+            <li v-for="(item, index) in menuItems" :key="index">
+              <component
+                :is="item.isRouter ? 'RouterLink' : 'a'"
+                :to="item.isRouter ? item.to : undefined"
+                :href="!item.isRouter ? item.to : undefined"
+                class="text-gray-700 hover:text-gray-900 transition-colors flex items-center"
+                @click="item.onClick ? item.onClick() : null"
               >
-                去逛逛
-              </RouterLink>
-            </li>
-            <li>
-              <a href="#" class="text-gray-700 hover:text-gray-900 transition-colors">關於我們</a>
-            </li>
-            <li>
-              <RouterLink to="/login" class="text-gray-700 hover:text-gray-900 transition-colors">
-                會員登入
-              </RouterLink>
+                <font-awesome-icon v-if="item.icon" :icon="item.icon" class="mr-1" />
+                {{ item.text }}
+              </component>
             </li>
           </ul>
         </nav>
@@ -102,40 +98,26 @@
 
             <ul class="space-y-6">
               <li
+                v-for="(item, index) in menuItems"
+                :key="index"
                 class="transform transition-transform duration-500 translate-x-0"
-                :style="{ transitionDelay: '150ms' }"
+                :style="{ transitionDelay: `${150 + index * 50}ms` }"
               >
-                <RouterLink
-                  :to="{ name: 'shop' }"
-                  class="block text-gray-700 hover:text-gray-900 transition-colors text-lg"
-                  @click="isMenuOpen = false"
+                <component
+                  :is="item.isRouter ? 'RouterLink' : 'a'"
+                  :to="item.isRouter ? item.to : undefined"
+                  :href="!item.isRouter ? item.to : undefined"
+                  class="block text-gray-700 hover:text-gray-900 transition-colors text-lg flex items-center"
+                  @click="
+                    () => {
+                      isMenuOpen = false
+                      if (item.onClick) item.onClick()
+                    }
+                  "
                 >
-                  去逛逛
-                </RouterLink>
-              </li>
-              <li
-                class="transform transition-transform duration-500 translate-x-0"
-                :style="{ transitionDelay: '200ms' }"
-              >
-                <a
-                  href="#"
-                  class="block text-gray-700 hover:text-gray-900 transition-colors text-lg"
-                  @click="isMenuOpen = false"
-                >
-                  關於我們
-                </a>
-              </li>
-              <li
-                class="transform transition-transform duration-500 translate-x-0"
-                :style="{ transitionDelay: '250ms' }"
-              >
-                <RouterLink
-                  to="/login"
-                  class="block text-gray-700 hover:text-gray-900 transition-colors text-lg"
-                  @click="isMenuOpen = false"
-                >
-                  會員登入
-                </RouterLink>
+                  <font-awesome-icon v-if="item.icon" :icon="item.icon" class="mr-2" />
+                  {{ item.text }}
+                </component>
               </li>
             </ul>
           </div>
@@ -147,8 +129,38 @@
 
 <script setup>
 import { ref } from 'vue'
+// 導入 Font Awesome 相關的組件和圖標
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
+import { faCircleInfo, faCartShopping } from '@fortawesome/free-solid-svg-icons'
+
+// 將圖標添加到庫中
+library.add(faCircleUser, faCircleInfo, faCartShopping)
 
 const isMenuOpen = ref(false)
+
+// 定義所有選單項目
+const menuItems = [
+  {
+    text: '去逛逛',
+    to: { name: 'shop' },
+    isRouter: true,
+    icon: ['fas', 'cart-shopping'],
+  },
+  {
+    text: '關於我們',
+    to: '#',
+    isRouter: false,
+    icon: ['fas', 'circle-info'],
+  },
+  {
+    text: '會員登入',
+    to: '/login',
+    isRouter: true,
+    icon: ['far', 'circle-user'],
+  },
+]
 </script>
 
 <style scoped>
