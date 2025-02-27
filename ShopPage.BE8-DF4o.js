@@ -1,1 +1,0 @@
-import{_ as e}from"./_plugin-vue_export-helper.DlAUqK2U.js";import{a as o,o as r}from"./index.CzFUnl4F.js";const c={};function t(n,a){return r(),o("div",null,"SHOPPAGE")}const f=e(c,[["render",t]]);export{f as default};

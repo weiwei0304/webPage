@@ -1,25 +1,21 @@
 <!doctype html>
-<html lang="">
+<html>
   <head>
-    <meta charset="UTF-8" />
-
-    <link rel="icon" href="favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-
-    <script type="text/javascript">
-      ;(function () {
-        var redirect = sessionStorage.redirect
-        delete sessionStorage.redirect
-        if (redirect && redirect != location.href) {
-          history.replaceState(null, null, redirect)
-        }
-      })()
+    <meta charset="utf-8" />
+    <title>Redirecting...</title>
+    <script>
+      // 单页应用 GitHub Pages 重定向脚本
+      // 当尝试直接访问子路由时使用
+      const segmentCount = 1 // 调整为您仓库深度 (通常为1，表示/webPage/)
+      const l = window.location
+      const repo = l.pathname
+        .split('/')
+        .slice(0, 1 + segmentCount)
+        .join('/')
+      l.replace(`${l.origin}${repo}/?p=${l.pathname.slice(repo.length)}${l.search}`)
     </script>
-    <script type="module" crossorigin src="/webPage/index.CzFUnl4F.js"></script>
-    <link rel="stylesheet" crossorigin href="/webPage/style.CmQEz465.css">
   </head>
   <body>
-    <div id="app"></div>
+    <p>Redirecting to the home page...</p>
   </body>
 </html>
