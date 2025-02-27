@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-6xl mx-auto">
+  <div class="w-full mx-auto">
     <RouterView />
   </div>
 </template>

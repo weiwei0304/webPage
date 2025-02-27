@@ -1,19 +1,27 @@
 <template>
-  <div
-    class="relative w-full h-screen bg-cover bg-center"
-    :style="{ backgroundImage: `url(${backgroundImage})` }"
-  >
-    <!-- 模糊層 -->
-    <div class="absolute inset-0 backdrop-blur-sm bg-white/30"></div>
+  <div>
+    <!-- 第一屏：全屏顯示 carousel -->
+    <div
+      class="relative w-full h-screen bg-cover bg-center"
+      :style="{ backgroundImage: `url(${backgroundImage})` }"
+    >
+      <!-- 模糊層 -->
+      <div class="absolute inset-0 backdrop-blur-sm bg-white/30"></div>
 
-    <!-- 內容層 -->
-    <div class="relative z-10 flex flex-col h-full">
-      <the-header class="absolute top-0 w-full"></the-header>
-      <div class="mt-auto mb-auto mx-auto w-full">
-        <the-carousel></the-carousel>
+      <!-- 第一屏內容 -->
+      <div class="relative z-10 h-full">
+        <the-header class="absolute top-0 w-full"></the-header>
+        <div class="h-full flex items-center justify-center w-full">
+          <the-carousel></the-carousel>
+        </div>
       </div>
-      <the-footer></the-footer>
     </div>
+
+    <!-- 第二屏：about us 區塊 -->
+    <about-us class="w-full"></about-us>
+
+    <!-- 頁腳 -->
+    <the-footer></the-footer>
   </div>
 </template>
 
@@ -22,6 +30,7 @@ import backgroundImage from '../assets/bg.jpg'
 import TheHeader from '../components/header/TheHeader.vue'
 import TheFooter from '../components/footer/TheFooter.vue'
 import TheCarousel from '../components/TheCarousel.vue'
+import AboutUs from '../components/AboutUs.vue'
 
 export default {
   data() {
@@ -34,6 +43,7 @@ export default {
     TheHeader,
     TheFooter,
     TheCarousel,
+    AboutUs,
   },
 }
 </script>
