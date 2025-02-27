@@ -8,7 +8,7 @@
       <!-- 模糊層 -->
       <div class="absolute inset-0 backdrop-blur-sm bg-white/30"></div>
 
-      <!-- 第一屏內容 -->
+      <!-- carousel區塊 -->
       <div class="relative z-10 h-full">
         <the-header class="absolute top-0 w-full"></the-header>
         <div class="h-full flex items-center justify-center w-full">
@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <!-- 第二屏：about us 區塊 -->
+    <!-- about us 區塊 -->
     <about-us class="w-full"></about-us>
 
     <!-- 頁腳 -->

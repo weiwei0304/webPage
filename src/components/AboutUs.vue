@@ -33,8 +33,8 @@ export default {
           icon: 'iphone.jpeg',
         },
         {
-          name: 'iPhone維修/價格',
-          icon: 'iphone.jpeg',
+          name: 'ipad維修/價格',
+          icon: 'ipad.jpeg',
         },
       ],
     }
