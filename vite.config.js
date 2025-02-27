@@ -12,6 +12,7 @@ export default defineConfig({
     },
   },
   build: {
+    outDir: 'dist', // 正確的位置
     minify: 'terser',
     sourcemap: false,
     rollupOptions: {
