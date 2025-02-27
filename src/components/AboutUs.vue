@@ -32,6 +32,10 @@ export default {
           name: 'iPhone維修/價格',
           icon: 'iphone.jpeg',
         },
+        {
+          name: 'iPhone維修/價格',
+          icon: 'iphone.jpeg',
+        },
       ],
     }
   },
