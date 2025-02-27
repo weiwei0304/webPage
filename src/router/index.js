@@ -1,11 +1,11 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
 import HomePage from '@/pages/HomePage.vue'
 import LoginPage from '@/pages/LoginPage.vue'
 import ShopPage from '@/pages/ShopPage.vue'
 
 const router = createRouter({
-  history: createWebHashHistory(), // 繼續使用 hash 模式
+  history: createWebHistory('/webPage/'),
   routes: [
     {
       path: '/',
