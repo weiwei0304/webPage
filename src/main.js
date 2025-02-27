@@ -1,11 +1,8 @@
-import './assets/main.css'
-
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
-const app = createApp(App)
+// 如果有样式文件，确保使用相对路径
+import './assets/main.css'
 
-app.use(router)
-
-app.mount('#app')
+createApp(App).use(router).mount('#app')

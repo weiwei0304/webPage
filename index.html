@@ -1,17 +1,16 @@
 <!doctype html>
-<html lang="">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-
-    <link rel="icon" href="favicon.ico" />
+    <link rel="icon" href="/webPage/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-
-    <script type="text/javascript">
+    <title>Vue App</title>
+    <!-- 如果从404.html重定向过来，处理路由 -->
+    <script>
       ;(function () {
-        var redirect = sessionStorage.redirect
+        const redirect = sessionStorage.redirect
         delete sessionStorage.redirect
-        if (redirect && redirect != location.href) {
+        if (redirect && redirect !== location.href) {
           history.replaceState(null, null, redirect)
         }
       })()
@@ -19,6 +18,6 @@
   </head>
   <body>
     <div id="app"></div>
-    <script type="module" src="src/main.js"></script>
+    <script type="module" src="./src/main.js"></script>
   </body>
 </html>

@@ -1,19 +1,28 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
+import HomePage from '@/pages/HomePage.vue'
+import LoginPage from '@/pages/LoginPage.vue'
+import ShopPage from '@/pages/ShopPage.vue'
+
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHashHistory(), // 繼續使用 hash 模式
   routes: [
     {
       path: '/',
       name: 'home',
-      component: () => import('../pages/HomePage.vue'),
+      // 直接使用靜態導入
+      component: HomePage,
     },
     {
       path: '/login',
       name: 'login',
-      component: () => import('../pages/LoginPage.vue'),
+      component: LoginPage,
     },
-    { path: '/shop', name: 'shop', component: () => import('../pages/ShopPage.vue') },
+    {
+      path: '/shop',
+      name: 'shop',
+      component: ShopPage,
+    },
   ],
 })
 
