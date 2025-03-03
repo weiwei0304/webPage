@@ -18,9 +18,9 @@
     </div>
 
     <!-- about us 區塊 -->
-    <about-us class="w-full"></about-us>
+    <about-us id="about-us" class="w-full"></about-us>
 
-    <!-- 頁腳 -->
+    <!-- footer -->
     <the-footer></the-footer>
   </div>
 </template>

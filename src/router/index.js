@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '@/pages/HomePage.vue'
 import LoginPage from '@/pages/LoginPage.vue'
 import ShopPage from '@/pages/ShopPage.vue'
+import ProductDetail from '@/pages/ProductDetail.vue'
 
 const router = createRouter({
   history: createWebHistory('/webPage/'),
@@ -23,6 +24,7 @@ const router = createRouter({
       name: 'shop',
       component: ShopPage,
     },
+    { path: '/shop/:id', name: 'ProductDetail', component: ProductDetail },
   ],
 })
 

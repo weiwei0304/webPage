@@ -3,9 +3,9 @@
     <header class="w-full py-4 px-6 shadow-sm">
       <div class="container mx-auto flex justify-between items-center">
         <!-- Logo 部分 -->
-        <div class="logo">
+        <RouterLink to="/" class="logo">
           <h1 class="text-xl font-bold text-gray-800">網站名稱</h1>
-        </div>
+        </RouterLink>
 
         <!-- 桌面版導航選單 - 在更小的螢幕尺寸以上顯示 -->
         <nav class="hidden sm:block">
@@ -15,7 +15,7 @@
                 :is="item.isRouter ? 'RouterLink' : 'a'"
                 :to="item.isRouter ? item.to : undefined"
                 :href="!item.isRouter ? item.to : undefined"
-                class="text-gray-700 hover:text-gray-900 transition-colors flex items-center"
+                class="text-gray-700 hover:text-gray-900 transition-colors flex items-center cursor-pointer"
                 @click="item.onClick ? item.onClick() : null"
               >
                 <font-awesome-icon v-if="item.icon" :icon="item.icon" class="mr-1" />
@@ -107,7 +107,7 @@
                   :is="item.isRouter ? 'RouterLink' : 'a'"
                   :to="item.isRouter ? item.to : undefined"
                   :href="!item.isRouter ? item.to : undefined"
-                  class="block text-gray-700 hover:text-gray-900 transition-colors text-lg flex items-center"
+                  class="block text-gray-700 hover:text-gray-900 transition-colors text-lg cursor-pointer items-center"
                   @click="
                     () => {
                       isMenuOpen = false
@@ -150,7 +150,7 @@ const menuItems = [
   },
   {
     text: '關於我們',
-    to: '#',
+    to: '#about-us',
     isRouter: false,
     icon: ['fas', 'circle-info'],
   },
