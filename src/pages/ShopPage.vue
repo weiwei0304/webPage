@@ -38,32 +38,81 @@
           </h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <!-- 商品卡片 -->
-            <RouterLink
+            <div
               v-for="i in 10"
               :key="i"
-              :to="{ name: 'ProductDetail', params: { id: i } }"
-              class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow cursor-pointer"
+              class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow cursor-pointer relative group"
             >
-              <div class="h-40 bg-gray-200 flex items-center justify-center">
+              <!-- 商品圖片 -->
+              <div
+                @click="goToProductDetail(i)"
+                class="h-40 bg-gray-200 flex items-center justify-center relative"
+              >
                 <span class="text-gray-400">商品圖片</span>
-              </div>
-              <div class="p-3">
-                <h3 class="font-medium">商品名稱 {{ i }}</h3>
-                <div class="flex justify-between">
-                  <p class="text-red-500 mt-2">$899</p>
-                  <div
-                    class="px-3 py-2 rounded-md flex gap-2 items-center border border-gray-300 hover:border-green-500 hover:bg-green-200 duration-300"
+
+                <!-- md 以上顯示的懸停按鈕 -->
+                <div
+                  class="hidden md:flex absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition-opacity flex-col justify-end items-center gap-4 pb-4"
+                >
+                  <button @click.stop="openModal" title="加入我的最愛">
+                    <font-awesome-icon :icon="faHeart" class="text-gray-200 hover:text-red-500" />
+                  </button>
+
+                  <button
+                    @click.stop="openModal"
+                    class="w-80 rounded-md bg-white p-2 hover:bg-blue-100 transition group/cart-btn"
+                    title="加入購物車"
                   >
-                    <div class="text-sm">加入購物車</div>
-                    <font-awesome-icon :icon="faCartPlus" />
-                  </div>
+                    加入購物車
+                    <font-awesome-icon
+                      :icon="faCartPlus"
+                      class="group-hover/cart-btn:text-blue-400 transition-colors"
+                    />
+                  </button>
                 </div>
               </div>
-            </RouterLink>
+
+              <!-- 產品資訊區塊 - 改為 flex row 在小螢幕 -->
+              <div class="p-3 flex flex-row md:flex-col justify-between items-center">
+                <!-- 產品名稱和價格 -->
+                <div class="flex flex-col items-start md:items-center">
+                  <h3 @click="goToProductDetail(i)" class="font-medium">商品名稱 {{ i }}</h3>
+                  <p class="text-red-500">$899</p>
+                </div>
+
+                <!-- 小螢幕上顯示的按鈕 (在產品名稱價格旁邊) -->
+                <div class="flex md:hidden gap-2">
+                  <button
+                    @click.stop="openModal"
+                    title="加入我的最愛"
+                    class="text-gray-500 hover:text-red-500"
+                  >
+                    <font-awesome-icon :icon="faHeart" />
+                  </button>
+
+                  <button
+                    @click.stop="openModal"
+                    class="rounded-md hover:bg-blue-100 transition group/cart-btn w-20 border border-gray-400 bg-gray-300 p-2"
+                    title="加入購物車"
+                  >
+                    <font-awesome-icon
+                      :icon="faCartPlus"
+                      class="text-yellow-600 transition-colors"
+                    />
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Modal组件 -->
+    <BaseModal v-model="showModal">
+      <div>這是Modal</div>
+    </BaseModal>
+
     <the-footer></the-footer>
   </div>
 </template>
@@ -71,20 +120,24 @@
 <script>
 import TheHeader from '../components/header/TheHeader.vue'
 import TheFooter from '@/components/footer/TheFooter.vue'
+import BaseModal from '@/components/modal/BaseModal.vue'
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
+import { faCartPlus, faHeart, faTimes } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   components: {
     TheHeader,
     TheFooter,
     FontAwesomeIcon,
+    BaseModal,
   },
 
   data() {
     return {
       faCartPlus,
+      faHeart,
+      faTimes,
       selectedCategory: null,
       categories: [
         { id: 1, name: '全部商品', count: 48 },
@@ -93,6 +146,7 @@ export default {
         { id: 4, name: '充電設備', count: 15 },
         { id: 5, name: '藍牙耳機', count: 6 },
       ],
+      showModal: false,
     }
   },
 
@@ -107,8 +161,33 @@ export default {
   methods: {
     selectCategory(categoryId) {
       this.selectedCategory = categoryId
-      // 這裡可以加載對應分類的商品
       console.log('選中分類:', categoryId)
+    },
+
+    // 前往商品詳情頁面的方法
+    goToProductDetail(productId) {
+      this.$router.push({ name: 'ProductDetail', params: { id: productId } })
+    },
+
+    openModal() {
+      this.showModal = true
+    },
+    // 加入購物車方法
+    addToCart(productId) {
+      console.log('加入購物車:', productId)
+      // 這裡可以添加加入購物車的邏輯，例如向購物車服務發送請求
+    },
+
+    // 加入我的最愛方法
+    addToFavorite(productId) {
+      console.log('加入我的最愛:', productId)
+      // 這裡可以添加加入我的最愛的邏輯，例如向收藏服務發送請求
+    },
+
+    // 前往購物車頁面
+    goToCart() {
+      this.showCartModal = false
+      this.$router.push({ name: 'ShoppingCart' })
     },
   },
 }
