@@ -11,7 +11,7 @@
       <!-- carousel區塊 -->
       <div class="relative z-10 h-full">
         <the-header class="absolute top-0 w-full"></the-header>
-        <div class="h-full flex items-center justify-center w-full">
+        <div class="h-full flex items-center justify-center w-full pt-20">
           <the-carousel></the-carousel>
         </div>
       </div>
