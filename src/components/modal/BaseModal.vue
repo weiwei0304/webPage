@@ -1,15 +1,25 @@
 <template>
   <teleport to="body">
-    <div
-      v-if="modelValue"
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-      @click="$emit('update:modelValue', false)"
+    <transition
+      enter-active-class="transition-all duration-300 ease-out"
+      leave-active-class="transition-all duration-200 ease-in"
+      enter-from-class="opacity-0"
+      leave-to-class="opacity-0"
     >
-      <div class="bg-white rounded-lg shadow-lg max-w-md w-full mx-4" @click.stop>
-        <!-- 所有內容通過默認 slot 傳入 -->
-        <slot></slot>
+      <div
+        v-if="modelValue"
+        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+        @click="$emit('update:modelValue', false)"
+      >
+        <div
+          class="bg-white rounded-lg shadow-lg max-w-md w-full mx-4 transition-all duration-300 transform"
+          :class="modelValue ? 'scale-100 opacity-100' : 'scale-95 opacity-0'"
+          @click.stop
+        >
+          <slot></slot>
+        </div>
       </div>
-    </div>
+    </transition>
   </teleport>
 </template>
 

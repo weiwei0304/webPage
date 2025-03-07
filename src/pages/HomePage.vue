@@ -29,7 +29,7 @@
 import backgroundImage from '../assets/bg.jpg'
 import TheHeader from '../components/header/TheHeader.vue'
 import TheFooter from '../components/footer/TheFooter.vue'
-import TheCarousel from '../components/TheCarousel.vue'
+import TheCarousel from '../components/carousel/TheCarousel.vue'
 import AboutUs from '../components/AboutUs.vue'
 
 export default {

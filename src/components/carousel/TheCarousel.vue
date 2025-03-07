@@ -1,3 +1,5 @@
+<!-- note: 這是用在HomePage的carousel -->
+
 <template>
   <div
     class="carousel-container relative h-full w-full mx-auto overflow-hidden rounded-lg shadow-lg"
