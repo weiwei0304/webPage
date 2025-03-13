@@ -203,6 +203,22 @@
                 </button>
               </div>
             </div>
+
+            <!-- 按鈕 -->
+            <div class="flex flex-col text-sm">
+              <button
+                @click="addToCart(currentProduct.id)"
+                class="w-full bg-blue-500 text-white py-2 rounded mt-4"
+              >
+                加入購物車
+              </button>
+              <button
+                @click="addToFavorite(currentProduct.id)"
+                class="w-full bg-gray-500 text-white py-2 rounded mt-4"
+              >
+                加入我的最愛
+              </button>
+            </div>
           </div>
         </div>
       </div>
