@@ -45,7 +45,7 @@
             >
               <!-- 商品圖片 -->
               <div
-                @click="goToProductDetail(i)"
+                @click="goToProductDetail(product.id)"
                 class="h-60 bg-gray-200 flex items-center justify-center relative"
               >
                 <img
@@ -82,7 +82,7 @@
                 <!-- 產品名稱和價格 - 添加 flex-grow 和 w-full 使其佔據所有可用空間 -->
                 <div
                   class="flex flex-col items-start md:items-center flex-grow w-full cursor-pointer"
-                  @click="goToProductDetail(i)"
+                  @click="goToProductDetail(product.id)"
                 >
                   <h3 class="font-medium">{{ product.name }}</h3>
                   <p class="text-red-500">$899</p>
@@ -127,7 +127,11 @@
               :alt="currentProduct.name"
               class="object-contain w-full h-full"
             />
-            <div>carousel</div>
+            <base-carousel
+              v-if="currentProduct.images && currentProduct.images.length > 0"
+              :images="currentProduct.images"
+              image-height="100px"
+            ></base-carousel>
           </div>
         </div>
         <div class="w-1/2">
@@ -178,36 +182,25 @@
             <!-- 數量 -->
             <div>
               <label class="font-medium block mb-1">數量</label>
-              <div class="flex h-10 border border-gray-300 rounded overflow-hidden">
+              <div class="flex h-12 border border-gray-300 rounded overflow-hidden">
                 <button
                   @click="decreaseQuantity"
-                  class="w-12 flex justify-center items-center bg-white border-r border-gray-300 hover:bg-gray-100"
+                  class="w-1/4 flex justify-center items-center bg-white border-r border-gray-300 hover:bg-gray-100"
                 >
-                  <span class="text-lg">-</span>
+                  <span class="text-xl font-bold">-</span>
                 </button>
                 <input
                   type="text"
                   v-model="currentProduct.quantity"
-                  class="flex-grow text-center focus:outline-none"
-                  @input="validateInput"
+                  class="w-1/2 text-center focus:outline-none"
+                  @input="validateQuantityInput"
                 />
                 <button
                   @click="increaseQuantity"
-                  class="w-12 flex justify-center items-center bg-white border-l border-gray-300 hover:bg-gray-100"
+                  class="w-1/4 flex justify-center items-center bg-white border-l border-gray-300 hover:bg-gray-100"
                 >
-                  <span class="text-lg">+</span>
+                  <span class="text-xl font-bold">+</span>
                 </button>
-              </div>
-
-              <!-- buttons -->
-              <div class="flex flex-col gap-4 mt-8">
-                <div class="flex gap-2">
-                  <button class="w-full bg-yellow-400">加入購物車</button>
-                  <button class="w-full bg-slate-500">立即購買</button>
-                </div>
-                <div class="flex justify-center">
-                  <button class="hover:text-gray-400 transition-colors">加入追蹤清單</button>
-                </div>
               </div>
             </div>
           </div>
@@ -223,6 +216,7 @@
 import TheHeader from '../components/header/TheHeader.vue'
 import TheFooter from '@/components/footer/TheFooter.vue'
 import BaseModal from '@/components/modal/BaseModal.vue'
+import BaseCarousel from '@/components/carousel/BaseCarousel.vue'
 
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faCartPlus, faHeart, faTimes } from '@fortawesome/free-solid-svg-icons'
@@ -233,6 +227,7 @@ export default {
     TheFooter,
     FontAwesomeIcon,
     BaseModal,
+    BaseCarousel,
   },
 
   data() {
@@ -269,6 +264,11 @@ export default {
             { id: 's-2', name: 'iPhone 16 pro max', inStock: true },
             { id: 's-3', name: 'iPhone 16', inStock: false },
           ],
+          images: [
+            { src: 'https://picsum.photos/id/1/800/600', alt: '產品圖片 1' },
+            { src: 'https://picsum.photos/id/20/800/600', alt: '產品圖片 2' },
+            { src: 'https://picsum.photos/id/37/800/600', alt: '產品圖片 3' },
+          ],
         },
         {
           id: 2,
@@ -282,6 +282,11 @@ export default {
           sizes: [
             { id: 's-1', name: '標準版', inStock: true },
             { id: 's-2', name: '快充版', inStock: true },
+          ],
+          images: [
+            { src: 'https://picsum.photos/id/1/800/600', alt: '產品圖片 1' },
+            { src: 'https://picsum.photos/id/20/800/600', alt: '產品圖片 2' },
+            { src: 'https://picsum.photos/id/37/800/600', alt: '產品圖片 3' },
           ],
         },
         {
@@ -298,6 +303,11 @@ export default {
             { id: 's-1', name: '一般款', inStock: true },
             { id: 's-2', name: '防摔款', inStock: true },
           ],
+          images: [
+            { src: 'https://picsum.photos/id/1/800/600', alt: '產品圖片 1' },
+            { src: 'https://picsum.photos/id/20/800/600', alt: '產品圖片 2' },
+            { src: 'https://picsum.photos/id/37/800/600', alt: '產品圖片 3' },
+          ],
         },
       ],
 
@@ -306,6 +316,7 @@ export default {
         name: '',
         price: 0,
         image: '',
+        images: [],
         colors: [],
         sizes: [],
         selectedColorId: '',
@@ -337,6 +348,7 @@ export default {
     openProductModal(product) {
       this.currentProduct = {
         ...product,
+        images: product.images || [],
         selectedColorId: '',
         selectedSizeId: '',
         quantity: 1,
