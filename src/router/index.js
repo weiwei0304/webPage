@@ -29,6 +29,10 @@ const router = createRouter({
     { path: '/repair-price', name: 'repair', component: RepairHome },
     { path: '/about-us', name: 'about-us', component: AboutUsPage },
   ],
+  scrollBehavior() {
+    // 始終滾動到頂部
+    return { top: 0 }
+  },
 })
 
 export default router

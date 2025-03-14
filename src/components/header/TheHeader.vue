@@ -59,13 +59,17 @@
 
     <!-- 行動版側邊選單 - 滑入效果 -->
     <transition>
-      <div v-if="isMenuOpen" class="fixed inset-0 z-50 sm:hidden" @click.self="isMenuOpen = false">
+      <div
+        v-if="isMenuOpen"
+        class="fixed inset-0 z-[100] sm:hidden"
+        @click.self="isMenuOpen = false"
+      >
         <!-- 背景遮罩 - 加入淡入淡出效果 -->
         <div class="absolute inset-0 bg-black bg-opacity-50 transition-opacity duration-500"></div>
 
-        <!-- 側邊選單 - 加強滑動效果 -->
+        <!-- 側邊選單 - 加強滑動效果，提高z-index -->
         <div
-          class="absolute top-0 right-0 w-64 h-full bg-white shadow-xl transform transition-all duration-500 ease-out overflow-hidden"
+          class="absolute top-0 right-0 w-64 h-full bg-white shadow-xl transform transition-all duration-500 ease-out overflow-hidden z-[100]"
           :class="{
             'translate-x-0 scale-100': isMenuOpen,
             'translate-x-full scale-95': !isMenuOpen,

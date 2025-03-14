@@ -9,6 +9,7 @@
           v-for="(service, index) in services"
           :key="index"
           class="bg-white p-4 rounded-lg shadow-sm flex flex-col items-center justify-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+          @click="navigateToService(service)"
         >
           <div class="mb-4 h-24 flex items-center justify-center">
             <img :src="service.icon" :alt="service.name" class="h-20 w-auto object-contain" />
@@ -31,26 +32,33 @@ export default {
         {
           name: 'iPhone維修/價格',
           icon: 'iphone.jpeg',
+          type: 'iphone',
         },
         {
           name: 'iPad維修/價格',
           icon: 'ipad.jpeg',
+          type: 'ipad',
         },
         {
           name: 'MacBook維修/價格',
           icon: 'macbook.jpeg',
+          type: 'macbook',
         },
         {
           name: '零件維修/價格',
           icon: 'phone-parts.jpeg',
+          type: 'parts',
         },
       ],
     }
   },
   methods: {
-    navigateToService(service) {
-      // 導航到對應服務頁面，可以根據需要實現
-      this.$router.push({ name: 'ServiceDetail', params: { type: service.name } })
+    navigateToService() {
+      // 導航到 repair-price 路徑，不帶查詢參數
+      this.$router.push('/repair-price')
+
+      // 如果需要在組件間傳遞數據，可以考慮使用 localStorage 或 Vuex
+      // 例如：localStorage.setItem('selectedDevice', service.type)
     },
   },
 }

@@ -45,7 +45,7 @@
       </div>
     </div>
 
-    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20 flex space-x-2">
+    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10 flex space-x-2">
       <div
         v-for="(slide, index) in slides"
         :key="index"

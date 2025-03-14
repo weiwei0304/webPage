@@ -1,11 +1,9 @@
 <template>
-  <div>
+  <div class="bg-gray-100 min-h-screen flex flex-col">
     <the-header></the-header>
 
-    <!-- 使用 TabComponent -->
-    <div class="container mx-auto my-8 px-4">
-      <h1 class="text-2xl font-bold mb-6">我的頁面</h1>
-
+    <!-- 使用 TabComponent - 添加 flex-grow 讓內容區域可以擴展 -->
+    <div class="container mx-auto my-8 px-4 flex-grow">
       <tab-component :tabs="tabItems" @tab-change="onTabChange">
         <!-- 第一個標籤的內容 -->
         <template #tab-content-0>
@@ -39,17 +37,26 @@
         </template>
       </tab-component>
     </div>
+
+    <repair-process></repair-process>
+
+    <!-- Footer 會自動保持在底部 -->
+    <the-footer></the-footer>
   </div>
 </template>
 
 <script>
 import TheHeader from '@/components/header/TheHeader.vue'
 import TabComponent from '@/components/tab/TabComponent.vue'
+import RepairProcess from './RepairProcess.vue'
+import TheFooter from '@/components/footer/TheFooter.vue'
 
 export default {
   components: {
     TheHeader,
     TabComponent,
+    RepairProcess,
+    TheFooter,
   },
   data() {
     return {

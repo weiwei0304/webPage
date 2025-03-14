@@ -1,6 +1,6 @@
 <template>
-  <div class="min-h-screen flex flex-col">
-    <the-header></the-header>
+  <div class="min-h-screen flex flex-col mt-20">
+    <the-header class="fixed z-20 top-0 w-full bg-teal-300"></the-header>
     <div class="flex-grow p-4">
       <div class="container mx-auto flex flex-col md:flex-row">
         <!-- 左側商品分類列表 -->
