@@ -8,16 +8,6 @@
         <font-awesome-icon :icon="['fab', 'instagram']" class="h-5 w-5" />
         <font-awesome-icon :icon="['fab', 'twitter']" class="h-5 w-5" />
       </div>
-      <div class="text-center sm:text-right">
-        <div class="inline-flex items-center relative border-b border-gray-400">
-          <input
-            type="email"
-            placeholder="Email"
-            class="bg-transparent outline-none px-2 py-1 text-sm"
-          />
-          <button type="submit" class="bg-transparent text-sm px-2 py-1 outline-none">訂閱</button>
-        </div>
-      </div>
     </div>
     <div class="hidden sm:flex w-full max-w-screen-lg justify-around">
       <div>

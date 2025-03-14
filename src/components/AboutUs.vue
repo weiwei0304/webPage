@@ -1,22 +1,15 @@
 <template>
-  <div class="py-10 bg-gray-50">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-8">我們的服務項目</h2>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-        <!-- 服務項目卡片 -->
-        <div
-          v-for="(service, index) in services"
-          :key="index"
-          class="bg-white p-4 rounded-lg shadow-sm flex flex-col items-center justify-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer"
-        >
-          <div class="mb-4 h-24 flex items-center justify-center">
-            <img :src="service.icon" :alt="service.name" class="h-20 w-auto object-contain" />
-          </div>
-          <div class="text-center font-medium text-gray-800">
-            {{ service.name }}
-          </div>
-        </div>
+  <div class="flex flex-col items-center justify-center gap-6 md:gap-0 md:flex-row">
+    <div class="origin-top-left rotate-12">
+      <img src="../../public/3c-icon.png" class="w-40" />
+    </div>
+    <div class="flex flex-col gap-4 p-6 md:w-1/2">
+      <h2 class="text-center text-xl md:text-right">
+        ABOUT US <span class="text-3xl">潮宇3C</span>
+      </h2>
+      <div class="leading-loose">
+        潮宇3C創立於2018年，是一間以Apple產品維修的專業團隊組成。創立至今我們秉持著「最有溫度的維修服務」，維修採用面對面的服務，同時保障消費者的隱私與權益。在2018年獨步領先業界，更換BSMI認證電池提供終身保固服務。並在2022年，保衛站成功通過Apple原廠零件獨立維修中心。
+        保衛站從高雄起步，遍布至全台都有保衛站分店，所有維修據點都能提供最即時的售後服務。我們始終秉持的是「認真做好每一件事，做有溫度的維修品牌！」
       </div>
     </div>
   </div>
@@ -24,26 +17,6 @@
 
 <script>
 export default {
-  name: 'AboutUsServices',
-  data() {
-    return {
-      services: [
-        {
-          name: 'iPhone維修/價格',
-          icon: 'iphone.jpeg',
-        },
-        {
-          name: 'ipad維修/價格',
-          icon: 'ipad.jpeg',
-        },
-      ],
-    }
-  },
-  methods: {
-    navigateToService(service) {
-      // 導航到對應服務頁面，可以根據需要實現
-      this.$router.push({ name: 'ServiceDetail', params: { type: service.name } })
-    },
-  },
+  name: 'AboutUs',
 }
 </script>

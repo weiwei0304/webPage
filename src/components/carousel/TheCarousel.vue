@@ -49,7 +49,7 @@
       <div
         v-for="(slide, index) in slides"
         :key="index"
-        @click="currentIndex = index"
+        @click.stop="goToSlide(index)"
         class="w-3 h-3 rounded-full cursor-pointer transition-all duration-200"
         :class="currentIndex === index ? 'bg-white' : 'bg-gray-400'"
       ></div>
@@ -85,10 +85,15 @@ export default {
       currentX: 0,
       isDragging: false,
       minSwipeDistance: 50,
+      isSwiping: false,
     }
   },
 
   methods: {
+    goToSlide(index) {
+      this.currentIndex = index
+    },
+
     prevSlide() {
       if (this.currentIndex > 0) {
         this.currentIndex--
@@ -107,6 +112,7 @@ export default {
 
     handleStart(e) {
       this.isDragging = true
+      this.isSwiping = false
       // 檢測是觸控還是滑鼠事件
       this.startX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX
     },
@@ -115,6 +121,10 @@ export default {
       if (!this.isDragging) return
       // 檢測是觸控還是滑鼠事件
       this.currentX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX
+
+      if (Math.abs(this.startX - this.currentX) > 10) {
+        this.isSwiping = true
+      }
     },
 
     handleEnd(e) {
@@ -124,14 +134,17 @@ export default {
       const endX = e.type.includes('touch') ? e.changedTouches[0].clientX : this.currentX
 
       // 計算滑動距離
-      if (this.startX - endX > this.minSwipeDistance) {
-        this.nextSlide()
-      } else if (endX - this.startX > this.minSwipeDistance) {
-        this.prevSlide()
+      if (this.isSwiping) {
+        if (this.startX - endX > this.minSwipeDistance) {
+          this.nextSlide()
+        } else if (endX - this.startX > this.minSwipeDistance) {
+          this.prevSlide()
+        }
       }
 
       // 重置狀態
       this.isDragging = false
+      this.isSwiping = false
       this.startX = 0
       this.currentX = 0
     },

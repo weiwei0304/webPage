@@ -10,7 +10,7 @@
         <!-- 桌面版導航選單 - 在更小的螢幕尺寸以上顯示 -->
         <nav class="hidden sm:block">
           <ul class="flex space-x-8">
-            <li v-for="(item, index) in menuItems" :key="index">
+            <li v-for="(item, index) in currentMenuItems" :key="index">
               <component
                 :is="item.isRouter ? 'RouterLink' : 'a'"
                 :to="item.isRouter ? item.to : undefined"
@@ -98,7 +98,7 @@
 
             <ul class="space-y-6">
               <li
-                v-for="(item, index) in menuItems"
+                v-for="(item, index) in currentMenuItems"
                 :key="index"
                 class="transform transition-transform duration-500 translate-x-0"
                 :style="{ transitionDelay: `${150 + index * 50}ms` }"
@@ -128,39 +128,58 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useRoute } from 'vue-router'
 // 導入 Font Awesome 相關的組件和圖標
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
-import { faCircleInfo, faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import {
+  faCircleInfo,
+  faCartShopping,
+  faScrewdriverWrench,
+} from '@fortawesome/free-solid-svg-icons'
 
 // 將圖標添加到庫中
-library.add(faCircleUser, faCircleInfo, faCartShopping)
+library.add(faCircleUser, faCircleInfo, faCartShopping, faScrewdriverWrench)
 
 const isMenuOpen = ref(false)
+const route = useRoute()
 
-// 定義所有選單項目
-const menuItems = [
-  {
-    text: '去逛逛',
-    to: { name: 'shop' },
-    isRouter: true,
-    icon: ['fas', 'cart-shopping'],
-  },
-  {
-    text: '關於我們',
-    to: '#about-us',
-    isRouter: false,
-    icon: ['fas', 'circle-info'],
-  },
-  {
-    text: '會員登入',
-    to: '/login',
-    isRouter: true,
-    icon: ['far', 'circle-user'],
-  },
-]
+// 判斷是否在首頁
+const isHomePage = computed(() => {
+  return route.name === 'home' || route.path === '/'
+})
+
+// 根據是否在首頁來定義選單項目
+const currentMenuItems = computed(() => {
+  return [
+    {
+      text: '維修價格',
+      to: isHomePage.value ? '#repair-price' : '/repair-price',
+      isRouter: !isHomePage.value,
+      icon: ['fas', 'screwdriver-wrench'],
+    },
+    {
+      text: '去逛逛',
+      to: { name: 'shop' },
+      isRouter: true,
+      icon: ['fas', 'cart-shopping'],
+    },
+    {
+      text: '關於我們',
+      to: isHomePage.value ? '#about-us' : '/about-us',
+      isRouter: !isHomePage.value,
+      icon: ['fas', 'circle-info'],
+    },
+    {
+      text: '會員登入',
+      to: '/login',
+      isRouter: true,
+      icon: ['far', 'circle-user'],
+    },
+  ]
+})
 </script>
 
 <style scoped>

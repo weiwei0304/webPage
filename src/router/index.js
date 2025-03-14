@@ -4,6 +4,8 @@ import HomePage from '@/pages/HomePage.vue'
 import LoginPage from '@/pages/LoginPage.vue'
 import ShopPage from '@/pages/ShopPage.vue'
 import ProductDetail from '@/pages/ProductDetail.vue'
+import RepairHome from '@/pages/repair/RepairHome.vue'
+import AboutUsPage from '@/pages/AboutUsPage.vue'
 
 const router = createRouter({
   history: createWebHistory('/webPage/'),
@@ -11,7 +13,6 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      // 直接使用靜態導入
       component: HomePage,
     },
     {
@@ -25,6 +26,8 @@ const router = createRouter({
       component: ShopPage,
     },
     { path: '/shop/:id', name: 'ProductDetail', component: ProductDetail },
+    { path: '/repair-price', name: 'repair', component: RepairHome },
+    { path: '/about-us', name: 'about-us', component: AboutUsPage },
   ],
 })
 

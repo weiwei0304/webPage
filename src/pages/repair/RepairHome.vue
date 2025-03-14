@@ -1,0 +1,84 @@
+<template>
+  <div>
+    <the-header></the-header>
+
+    <!-- 使用 TabComponent -->
+    <div class="container mx-auto my-8 px-4">
+      <h1 class="text-2xl font-bold mb-6">我的頁面</h1>
+
+      <tab-component :tabs="tabItems" @tab-change="onTabChange">
+        <!-- 第一個標籤的內容 -->
+        <template #tab-content-0>
+          <div class="p-4 bg-gray-50 rounded">
+            <h3 class="font-medium mb-2">第一個標籤內容</h3>
+            <p>這裡是第一個標籤的詳細內容...</p>
+          </div>
+        </template>
+
+        <!-- 第二個標籤的內容 -->
+        <template #tab-content-1>
+          <div class="p-4 bg-gray-50 rounded">
+            <h3 class="font-medium mb-2">第二個標籤內容</h3>
+            <p>這裡是第二個標籤的詳細內容...</p>
+          </div>
+        </template>
+
+        <!-- 第三個標籤的內容 -->
+        <template #tab-content-2>
+          <div class="p-4 bg-gray-50 rounded">
+            <h3 class="font-medium mb-2">第三個標籤內容</h3>
+            <p>這裡是第三個標籤的詳細內容...</p>
+          </div>
+        </template>
+
+        <template #tab-content-3>
+          <div class="p-4 bg-gray-50 rounded">
+            <h3 class="font-medium mb-2">第四個標籤內容</h3>
+            <p>這裡是第四個標籤的詳細內容...</p>
+          </div>
+        </template>
+      </tab-component>
+    </div>
+  </div>
+</template>
+
+<script>
+import TheHeader from '@/components/header/TheHeader.vue'
+import TabComponent from '@/components/tab/TabComponent.vue'
+
+export default {
+  components: {
+    TheHeader,
+    TabComponent,
+  },
+  data() {
+    return {
+      // 定義標籤資料
+      tabItems: [
+        {
+          title: '第一個標籤',
+          icon: 'iphone.jpeg',
+        },
+        {
+          title: '第二個標籤',
+          icon: 'ipad.jpeg',
+        },
+        {
+          title: '第三個標籤',
+          icon: 'macbook.jpeg',
+        },
+        {
+          title: '第四個標籤',
+          icon: 'phone-parts.jpeg',
+        },
+      ],
+    }
+  },
+  methods: {
+    // 處理標籤切換事件
+    onTabChange(index) {
+      console.log(`切換到標籤 ${index + 1}`)
+    },
+  },
+}
+</script>
